@@ -10,13 +10,14 @@ import logging
 import re
 from typing import Iterator
 
+import requests
 from sherlock_project.result import QueryStatus
 from sherlock_project.notify import QueryNotify
 from sherlock_project.sites import SitesInformation
 from sherlock_project.sherlock import sherlock
 
 from .dtos import SearchRequest, SiteResult
-from .exceptions import InvalidUsernameError
+from .exceptions import InvalidUsernameError, ServiceTimeoutError
 
 logger = logging.getLogger(__name__)
 
@@ -72,12 +73,15 @@ class SherlockService:
             site_data = {name: info for name, info in site_data.items() if name in req.sites}
 
         # --- Dispara a busca via sherlock() ---
-        results = sherlock(
-            username=req.username,
-            site_data=site_data,
-            query_notify=_SilentNotify(),
-            timeout=int(req.timeout),
-        )
+        try:
+            results = sherlock(
+                username=req.username,
+                site_data=site_data,
+                query_notify=_SilentNotify(),
+                timeout=int(req.timeout),
+            )
+        except requests.exceptions.Timeout as exc:
+            raise ServiceTimeoutError("Busca expirou.") from exc
 
         # --- Converte resultados para DTOs ---
         for site_name, site_info in results.items():

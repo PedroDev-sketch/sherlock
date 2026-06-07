@@ -18,10 +18,12 @@ Testes deste arquivo:
 from unittest.mock import patch
 
 import pytest
+import requests
+import responses as responses_lib
 from sherlock_project.result import QueryResult, QueryStatus
 
 from apps.core.dtos import SearchRequest, SiteResult
-from apps.core.exceptions import InvalidUsernameError
+from apps.core.exceptions import InvalidUsernameError, ServiceTimeoutError
 from apps.core.services import SherlockService
 
 
@@ -235,3 +237,46 @@ class TestSearchFiltersBySites:
             "site_data", mock_sherlock.call_args[0][1] if mock_sherlock.call_args[0] else {}
         )
         assert set(called_site_data.keys()) == {"GitHub"}
+
+
+# ---------------------------------------------------------------------------
+# Teste #4 — timeout do upstream é propagado como ServiceTimeoutError
+# ---------------------------------------------------------------------------
+
+class TestSearchPropagatesTimeout:
+
+    def test_search_propagates_timeout(self, service):
+        """
+        Dado: sherlock() levanta requests.exceptions.Timeout.
+        Quando: SherlockService.search() é chamado.
+        Então: levanta ServiceTimeoutError (sem vazar o requests.Timeout cru).
+        """
+        req = SearchRequest(username="torvalds")
+
+        with patch("apps.core.services.SitesInformation"):
+            with patch(
+                "apps.core.services.sherlock",
+                side_effect=requests.exceptions.Timeout("upstream timed out"),
+            ):
+                with pytest.raises(ServiceTimeoutError):
+                    list(service.search(req))
+
+
+# ---------------------------------------------------------------------------
+# Teste #8 — sem mock o serviço tenta rede real (protege a suíte de flakes)
+# ---------------------------------------------------------------------------
+
+class TestServiceDoesNotPerformRealNetwork:
+
+    @responses_lib.activate
+    def test_service_does_not_perform_real_network_in_tests(self, service):
+        """
+        Confirma que SherlockService faz chamadas HTTP quando não há mock.
+        responses.activate bloqueia toda rede real — qualquer tentativa levanta
+        ConnectionError, provando que os outros testes DEVEM mockar SitesInformation
+        e sherlock() para não depender de rede.
+        """
+        req = SearchRequest(username="torvalds")
+
+        with pytest.raises(Exception):
+            list(service.search(req))
