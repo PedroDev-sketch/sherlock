@@ -7,6 +7,7 @@ em SiteResult DTOs com mapeamento de status (Anexo A do PLANO_TDD.md).
 """
 
 import logging
+import re
 from typing import Iterator
 
 from sherlock_project.result import QueryStatus
@@ -61,10 +62,14 @@ class SherlockService:
         # --- Validação de entrada ---
         if not req.username or not req.username.strip():
             raise InvalidUsernameError("Username não pode ser vazio.")
+        if not re.match(r'^[a-zA-Z0-9_.-]+$', req.username):
+            raise InvalidUsernameError(f"Username contém caracteres inválidos: {req.username!r}")
 
         # --- Carrega dados de sites ---
         sites_info = SitesInformation(data_file_path=None)
         site_data = {site.name: site.information for site in sites_info}
+        if req.sites:
+            site_data = {name: info for name, info in site_data.items() if name in req.sites}
 
         # --- Dispara a busca via sherlock() ---
         results = sherlock(

@@ -8,6 +8,8 @@ Testes deste arquivo:
   #1b test_search_result_has_correct_url                — GREEN (Dia 2)
   #2  test_search_rejects_empty_username                — GREEN (Dia 2)
   #2b test_search_rejects_empty_username_without_...    — GREEN (Dia 2)
+  #3  test_search_rejects_username_with_invalid_chars   — GREEN (Dia 3)
+  #5  test_search_filters_by_sites                      — GREEN (Dia 3)
   #6  test_site_result_mapping_status_found             — GREEN (Dia 2)
   #7  test_site_result_mapping_status_not_found         — GREEN (Dia 2)
 """
@@ -104,6 +106,19 @@ class TestSearchReturnsResults:
 
 class TestSearchValidatesUsername:
 
+    def test_search_rejects_username_with_invalid_chars(self, service):
+        """
+        Dado: SearchRequest com username contendo caracteres inválidos (espaço, barra).
+        Quando: SherlockService.search() é chamado.
+        Então: levanta InvalidUsernameError sem realizar chamada de rede.
+        """
+        for bad in ("jo hn", "user/name", "a@b", "foo bar"):
+            req = SearchRequest(username=bad)
+            with patch("apps.core.services.sherlock") as mock_sherlock:
+                with pytest.raises(InvalidUsernameError):
+                    list(service.search(req))
+                mock_sherlock.assert_not_called()
+
     def test_search_rejects_empty_username(self, service):
         """
         Dado: SearchRequest com username vazio.
@@ -179,3 +194,44 @@ class TestSiteResultStatusMapping:
 
         assert len(results) == 1
         assert results[0].status == "not_found"
+
+
+# ---------------------------------------------------------------------------
+# Teste #5 — req.sites filtra quais sites são consultados
+# ---------------------------------------------------------------------------
+
+class TestSearchFiltersBySites:
+
+    def test_search_filters_by_sites(self, service):
+        """
+        Dado: SitesInformation retorna GitHub, Reddit e Twitter no mock.
+        Quando: SearchRequest(username="x", sites=["GitHub"]) é passado.
+        Então: sherlock() recebe site_data contendo APENAS a chave "GitHub".
+        """
+        github_site = _make_query_result(
+            "x", "GitHub", "https://github.com/x", QueryStatus.CLAIMED
+        )
+
+        mock_site = type("MockSite", (), {})()
+        mock_site.name = "GitHub"
+        mock_site.information = {"urlMain": "https://github.com"}
+
+        mock_site_reddit = type("MockSite", (), {})()
+        mock_site_reddit.name = "Reddit"
+        mock_site_reddit.information = {"urlMain": "https://reddit.com"}
+
+        mock_site_twitter = type("MockSite", (), {})()
+        mock_site_twitter.name = "Twitter"
+        mock_site_twitter.information = {"urlMain": "https://twitter.com"}
+
+        req = SearchRequest(username="x", sites=["GitHub"])
+
+        with patch("apps.core.services.SitesInformation") as mock_sites_cls:
+            mock_sites_cls.return_value = [mock_site, mock_site_reddit, mock_site_twitter]
+            with patch("apps.core.services.sherlock", return_value={"GitHub": github_site}) as mock_sherlock:
+                list(service.search(req))
+
+        called_site_data = mock_sherlock.call_args.kwargs.get(
+            "site_data", mock_sherlock.call_args[0][1] if mock_sherlock.call_args[0] else {}
+        )
+        assert set(called_site_data.keys()) == {"GitHub"}
