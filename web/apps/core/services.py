@@ -11,10 +11,10 @@ import re
 from typing import Iterator
 
 import requests
-from sherlock_project.result import QueryStatus
 from sherlock_project.notify import QueryNotify
-from sherlock_project.sites import SitesInformation
+from sherlock_project.result import QueryStatus
 from sherlock_project.sherlock import sherlock
+from sherlock_project.sites import SitesInformation
 
 from .dtos import SearchRequest, SiteResult
 from .exceptions import InvalidUsernameError, ServiceTimeoutError
@@ -64,13 +64,17 @@ class SherlockService:
         if not req.username or not req.username.strip():
             raise InvalidUsernameError("Username não pode ser vazio.")
         if not re.match(r'^[a-zA-Z0-9_.-]+$', req.username):
-            raise InvalidUsernameError(f"Username contém caracteres inválidos: {req.username!r}")
+            raise InvalidUsernameError(
+                f"Username contém caracteres inválidos: {req.username!r}"
+            )
 
         # --- Carrega dados de sites ---
         sites_info = SitesInformation(data_file_path=None)
         site_data = {site.name: site.information for site in sites_info}
         if req.sites:
-            site_data = {name: info for name, info in site_data.items() if name in req.sites}
+            site_data = {
+                name: info for name, info in site_data.items() if name in req.sites
+            }
 
         # --- Dispara a busca via sherlock() ---
         try:

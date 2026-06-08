@@ -15,7 +15,9 @@ def export_view(request):
         return HttpResponseBadRequest("Parâmetro 'username' é obrigatório.")
 
     if fmt not in _ALLOWED_FORMATS:
-        return HttpResponseBadRequest(f"Formato '{fmt}' não suportado. Use csv ou json.")
+        return HttpResponseBadRequest(
+            f"Formato '{fmt}' não suportado. Use csv ou json."
+        )
 
     service = SherlockService()
     results = list(service.search(SearchRequest(username=username)))

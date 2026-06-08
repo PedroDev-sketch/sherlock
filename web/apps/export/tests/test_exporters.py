@@ -6,9 +6,17 @@ from apps.export.exporters import to_csv, to_json
 
 def _make_results():
     return [
-        SiteResult(site_name="GitHub", url="https://github.com/john_doe", status="found"),
-        SiteResult(site_name="Reddit", url="https://reddit.com/user/john_doe", status="not_found"),
-        SiteResult(site_name="Twitter", url="https://twitter.com/john_doe", status="found"),
+        SiteResult(
+            site_name="GitHub", url="https://github.com/john_doe", status="found"
+        ),
+        SiteResult(
+            site_name="Reddit",
+            url="https://reddit.com/user/john_doe",
+            status="not_found",
+        ),
+        SiteResult(
+            site_name="Twitter", url="https://twitter.com/john_doe", status="found"
+        ),
     ]
 
 
@@ -21,7 +29,7 @@ def test_to_csv_has_expected_headers():
 def test_to_csv_writes_one_row_per_result():
     """Teste 2: Lista com 3 resultados → 4 linhas (header + 3)."""
     output = to_csv(_make_results())
-    lines = [l for l in output.split("\n") if l]
+    lines = [line for line in output.split("\n") if line]
     assert len(lines) == 4
 
 

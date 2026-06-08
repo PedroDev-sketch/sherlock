@@ -229,12 +229,18 @@ class TestSearchFiltersBySites:
         req = SearchRequest(username="x", sites=["GitHub"])
 
         with patch("apps.core.services.SitesInformation") as mock_sites_cls:
-            mock_sites_cls.return_value = [mock_site, mock_site_reddit, mock_site_twitter]
-            with patch("apps.core.services.sherlock", return_value={"GitHub": github_site}) as mock_sherlock:
+            mock_sites_cls.return_value = [
+                mock_site, mock_site_reddit, mock_site_twitter
+            ]
+            with patch(
+                "apps.core.services.sherlock",
+                return_value={"GitHub": github_site},
+            ) as mock_sherlock:
                 list(service.search(req))
 
-        called_site_data = mock_sherlock.call_args.kwargs.get(
-            "site_data", mock_sherlock.call_args[0][1] if mock_sherlock.call_args[0] else {}
+        args = mock_sherlock.call_args
+        called_site_data = args.kwargs.get(
+            "site_data", args[0][1] if args[0] else {}
         )
         assert set(called_site_data.keys()) == {"GitHub"}
 
