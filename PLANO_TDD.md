@@ -127,21 +127,21 @@ Cross-review obrigatório: a dupla X só faz merge se a dupla Y aprovar — queb
 |---------|--------|
 | `apps/core/dtos.py` — `SiteResult`, `SearchRequest` | ✅ Concluído (commit `32f6974`) |
 | `apps/core/exceptions.py` — `InvalidUsernameError`, `ServiceTimeoutError`, `UpstreamError` | ✅ Concluído (commit `32f6974`) |
-| `apps/core/services.py` — `SherlockService.search` stub + import do `sherlock` | ✅ Stub criado (implementação real: Dia 2) |
+| `apps/core/services.py` — `SherlockService.search` implementação real | ✅ Concluído |
 
 #### Testes (cada um inicia vermelho)
 | # | Teste | O que verifica | Status |
 |---|---|---|---|
-| 1 | `test_search_returns_results_for_known_user` | Mock de `sherlock_project` com 2 hits → 2 `SiteResult` com status correto. | 🔴 RED |
-| 1b | `test_search_result_has_correct_url` | Complementar: SiteResult carrega a URL do perfil. | 🔴 RED |
-| 2 | `test_search_rejects_empty_username` | `SearchRequest(username="")` levanta `InvalidUsernameError`. | 🔴 RED |
-| 2b | `test_search_rejects_empty_username_without_network_call` | Validação ocorre antes de chamar `sherlock()`. | 🔴 RED |
-| 3 | `test_search_rejects_username_with_invalid_chars` | Caracteres como `/`, espaço levantam `InvalidUsernameError`. | ⬜ Dia 3 |
-| 4 | `test_search_propagates_timeout` | Upstream estoura → levanta `ServiceTimeoutError`. | ⬜ Dia 3 |
-| 5 | `test_search_filters_by_sites` | `sites=["GitHub"]` → só aquele site é consultado (via mock). | ⬜ Dia 3 |
-| 6 | `test_site_result_mapping_status_found` | `QueryStatus.CLAIMED` → `"found"`. | ⬜ Dia 2 |
-| 7 | `test_site_result_mapping_status_not_found` | `QueryStatus.AVAILABLE` → `"not_found"`. | ⬜ Dia 2 |
-| 8 | `test_service_does_not_perform_real_network_in_tests` | Sem mock o teste falha — protege a suíte de flakes. | ⬜ Dia 3 |
+| 1 | `test_search_returns_results_for_known_user` | Mock de `sherlock_project` com 2 hits → 2 `SiteResult` com status correto. | ✅ GREEN |
+| 1b | `test_search_result_has_correct_url` | Complementar: SiteResult carrega a URL do perfil. | ✅ GREEN |
+| 2 | `test_search_rejects_empty_username` | `SearchRequest(username="")` levanta `InvalidUsernameError`. | ✅ GREEN |
+| 2b | `test_search_rejects_empty_username_without_network_call` | Validação ocorre antes de chamar `sherlock()`. | ✅ GREEN |
+| 3 | `test_search_rejects_username_with_invalid_chars` | Caracteres como `/`, espaço levantam `InvalidUsernameError`. | ✅ GREEN |
+| 4 | `test_search_propagates_timeout` | Upstream estoura → levanta `ServiceTimeoutError`. | ✅ GREEN |
+| 5 | `test_search_filters_by_sites` | `sites=["GitHub"]` → só aquele site é consultado (via mock). | ✅ GREEN |
+| 6 | `test_site_result_mapping_status_found` | `QueryStatus.CLAIMED` → `"found"`. | ✅ GREEN |
+| 7 | `test_site_result_mapping_status_not_found` | `QueryStatus.AVAILABLE` → `"not_found"`. | ✅ GREEN |
+| 8 | `test_service_does_not_perform_real_network_in_tests` | Sem mock o teste falha — protege a suíte de flakes. | ✅ GREEN |
 
 #### Definition of Done da Dupla 1
 - 100% dos testes acima passando.
@@ -170,15 +170,15 @@ Cross-review obrigatório: a dupla X só faz merge se a dupla Y aprovar — queb
 #### Testes
 | # | Teste | O que verifica | Status |
 |---|---|---|---|
-| 1 | `test_form_accepts_valid_username` | `SearchForm({"username":"john_doe"})` é válido. | 🔴 RED (forms.py vazio) |
-| 2 | `test_form_rejects_empty_username` | Username vazio → form inválido com erro em `username`. | 🔴 RED |
-| 3 | `test_form_rejects_invalid_chars` | `"jo hn"` → inválido. | 🔴 RED |
-| 4 | `test_index_view_get_renders_form` | GET `/` retorna 200 e contém o form. | ❌ Pendente (Dia 1) |
-| 5 | `test_results_view_post_invalid_returns_form_with_errors` | POST sem username → 200 + erro renderizado. | ⬜ Dia 2 |
-| 6 | `test_results_view_post_valid_calls_service_with_username` | POST válido invoca `SherlockService.search` com `SearchRequest` esperado (mock). | ⬜ Dia 2 |
-| 7 | `test_results_view_renders_hits` | Página de resultados mostra todos os `SiteResult` retornados pelo mock. | ⬜ Dia 3 |
-| 8 | `test_results_view_renders_empty_state` | Zero resultados renderiza `data-testid="empty-state"`. | ⬜ Dia 3 |
-| 9 | `test_results_view_renders_error_on_timeout` | Quando service levanta `ServiceTimeoutError`, página mostra `data-testid="error-state"`. | ⬜ Dia 3 |
+| 1 | `test_form_accepts_valid_username` | `SearchForm({"username":"john_doe"})` é válido. | ✅ GREEN |
+| 2 | `test_form_rejects_empty_username` | Username vazio → form inválido com erro em `username`. | ✅ GREEN |
+| 3 | `test_form_rejects_invalid_chars` | `"jo hn"` → inválido. | ✅ GREEN |
+| 4 | `test_index_view_get_renders_form` | GET `/` retorna 200 e contém o form. | ✅ GREEN |
+| 5 | `test_results_view_post_invalid_returns_form_with_errors` | POST sem username → 200 + erro renderizado. | ✅ GREEN |
+| 6 | `test_results_view_post_valid_calls_service_with_username` | POST válido invoca `SherlockService.search` com `SearchRequest` esperado (mock). | ✅ GREEN |
+| 7 | `test_results_view_renders_hits` | Página de resultados mostra todos os `SiteResult` retornados pelo mock. | ✅ GREEN |
+| 8 | `test_results_view_renders_empty_state` | Zero resultados renderiza `data-testid="empty-state"`. | ✅ GREEN |
+| 9 | `test_results_view_renders_error_on_timeout` | Quando service levanta `ServiceTimeoutError`, página mostra `data-testid="error-state"`. | ✅ GREEN |
 
 #### Definition of Done da Dupla 2
 - `data-testid` em todos os elementos interativos — base para o E2E futuro.
@@ -195,36 +195,33 @@ Cross-review obrigatório: a dupla X só faz merge se a dupla Y aprovar — queb
 > ℹ️ Sem banco nesta fase. O export refaz a busca via `SherlockService` a partir do `username` na URL e devolve o arquivo direto. Persistência fica para o Pós-MVP.
 
 #### Entregáveis — parte App
-- `apps/export/exporters.py`
-  - `to_csv(results: Iterable[SiteResult]) -> str`
-  - `to_json(results: Iterable[SiteResult], username: str) -> str`
-- `apps/export/views.py`
-  - `export_view`: `GET /export/?username=x&format=csv|json` → faz busca via `SherlockService` e devolve `HttpResponse` com `Content-Type` apropriado e `Content-Disposition: attachment`.
-- `apps/export/urls.py`: rota `/export/`.
+- `apps/export/exporters.py` — `to_csv`, `to_json` | ✅ Concluído
+- `apps/export/views.py` — `export_view` | ✅ Concluído
+- `apps/export/urls.py` — rota `/export/` | ✅ Concluído
 
 #### Entregáveis — parte Infra
-- Projeto Django inicializado (`web/manage.py`, `config/settings/{base,dev,test}.py`).
-- `web/pytest.ini` apontando `DJANGO_SETTINGS_MODULE=config.settings.test`.
-- `.github/workflows/ci-web.yml`:
-  - Job único: instala deps, roda `ruff check`, roda `pytest --cov=apps --cov-fail-under=70`.
-- `README.md` da raiz com seção curta "Rodando o web local" e "Rodando os testes do web".
+- Projeto Django inicializado (`web/manage.py`, `config/settings/{base,dev,test}.py`). | ✅ Concluído
+- `web/pytest.ini` apontando `DJANGO_SETTINGS_MODULE=config.settings.test`. | ✅ Concluído
+  - ⚠️ **Infra fix (Python 3.14):** adicionado `pythonpath = ..` ao `pytest.ini` — o `.pth` gerado pelo `pip install -e` não é processado pelo Python 3.14, então o pytest precisa adicionar o parent ao `sys.path` explicitamente.
+- `.github/workflows/ci-web.yml` com `--cov-fail-under=70` ativo. | ✅ Concluído
+- `README.md` da raiz com seção "Rodando o web local" e "Rodando os testes do web". | ✅ Concluído
 
-#### Testes a escrever
-| # | Teste | O que verifica |
-|---|---|---|
-| 1 | `test_to_csv_has_expected_headers` | `to_csv([...])` começa com `site_name,url,status`. |
-| 2 | `test_to_csv_writes_one_row_per_result` | Lista com 3 resultados → 4 linhas (header + 3). |
-| 3 | `test_to_csv_escapes_commas_in_fields` | Campo com vírgula é envolvido em aspas. |
-| 4 | `test_to_json_is_valid_and_has_expected_shape` | `json.loads(to_json(...))` tem chaves `username`, `hits`. |
-| 5 | `test_export_view_csv_returns_text_csv_content_type` | `?format=csv` → header `Content-Type: text/csv`. |
-| 6 | `test_export_view_json_returns_application_json` | `?format=json` → header `Content-Type: application/json`. |
-| 7 | `test_export_view_unknown_format_returns_400` | `?format=xml` → 400. |
-| 8 | `test_export_view_missing_username_returns_400` | Sem `username` → 400. |
+#### Testes
+| # | Teste | O que verifica | Status |
+|---|---|---|---|
+| 1 | `test_to_csv_has_expected_headers` | `to_csv([...])` começa com `site_name,url,status`. | ✅ GREEN |
+| 2 | `test_to_csv_writes_one_row_per_result` | Lista com 3 resultados → 4 linhas (header + 3). | ✅ GREEN |
+| 3 | `test_to_csv_escapes_commas_in_fields` | Campo com vírgula é envolvido em aspas. | ✅ GREEN |
+| 4 | `test_to_json_is_valid_and_has_expected_shape` | `json.loads(to_json(...))` tem chaves `username`, `hits`. | ✅ GREEN |
+| 5 | `test_export_view_csv_returns_text_csv_content_type` | `?format=csv` → header `Content-Type: text/csv`. | ✅ GREEN |
+| 6 | `test_export_view_json_returns_application_json` | `?format=json` → header `Content-Type: application/json`. | ✅ GREEN |
+| 7 | `test_export_view_unknown_format_returns_400` | `?format=xml` → 400. | ✅ GREEN |
+| 8 | `test_export_view_missing_username_returns_400` | Sem `username` → 400. | ✅ GREEN |
 
 #### Definition of Done da Dupla 3
-- CI rodando em todo PR e bloqueando merge se cobertura cair abaixo de 70%.
-- `python manage.py runserver` sobe a aplicação em `http://localhost:8000`.
-- `README.md` atualizado com instruções de execução.
+- CI rodando em todo PR e bloqueando merge se cobertura cair abaixo de 70%. | ✅
+- `python manage.py runserver` sobe a aplicação em `http://localhost:8000`. | ✅
+- `README.md` atualizado com instruções de execução. | ✅
 
 ---
 
@@ -272,50 +269,50 @@ Todo PR precisa demonstrar o ciclo. Roteiro:
 | **D3** | CI `ci-web.yml` rodando `pytest` com sucesso em PR. | ✅ Concluído — `.github/workflows/ci-web.yml` |
 | **D1** | Escreve testes 1 e 2 vermelhos do `SherlockService` (sem implementação ainda). | ✅ Concluído — `web/apps/core/tests/test_service.py` (4 testes RED) |
 | **D2** | Escreve testes 1, 2 e 3 vermelhos do `SearchForm`. | ✅ Concluído (commit `5570c85` + `928a6dc`) |
-| **D2** | Escreve teste 4 vermelho do `index_view` (GET retorna 200). | ❌ Pendente |
+| **D2** | Escreve teste 4 vermelho do `index_view` (GET retorna 200). | ✅ Concluído |
 
 **Marco Dia 1:** `pytest` roda no CI; cada dupla com pelo menos 2 testes vermelhos commitados.
-**Status do marco:** ✅ Concluído — CI ativo, 7 testes RED (4 D1 + 3 D2). Falta: teste #4 da D2 (`index_view`).
+**Status do marco:** ✅ Concluído.
 
 ### Dia 2 — Fluxo mínimo verde com mock
 
-| Dupla | Entregas |
-|---|---|
-| **D1** | `SherlockService.search` devolve lista hardcoded de `SiteResult`. DTOs e exceções definidos. Testes 1, 2, 6, 7 verdes. |
-| **D2** | `SearchForm` validando, `index_view` renderizando form, `results_view` chamando o service e renderizando. Testes 1–6 verdes. |
-| **D3** | Esqueleto do app `export`: rota e view stub que devolve 200. Teste 5 verde. |
+| Dupla | Entregas | Status |
+|---|---|---|
+| **D1** | `SherlockService.search` implementado. DTOs e exceções definidos. Testes 1, 2, 6, 7 verdes. | ✅ Concluído |
+| **D2** | `SearchForm` validando, `index_view` renderizando form, `results_view` chamando o service. Testes 1–6 verdes. | ✅ Concluído |
+| **D3** | Esqueleto do app `export`: rota e view stub que devolve 200. | ✅ Concluído |
 
-**Marco Dia 2:** abrir `/`, submeter form, ver lista mockada renderizada. Tudo via mocks.
+**Marco Dia 2:** ✅ Concluído.
 
 ### Dia 3 — Integração real com `sherlock_project`
 
-| Dupla | Entregas |
-|---|---|
-| **D1** | `SherlockService` chamando `sherlock_project.sherlock.sherlock(...)` de verdade. Mapeamento `QueryStatus → status`. Tratamento de timeout. Testes 3, 4, 5, 8 verdes. |
-| **D2** | Estados vazio e de erro renderizados. Testes 7, 8, 9 verdes. `data-testid` em tudo. |
-| **D3** | `to_csv` e `to_json` implementados. Testes 1–4 verdes. |
+| Dupla | Entregas | Status |
+|---|---|---|
+| **D1** | `SherlockService` chamando `sherlock_project` de verdade. Mapeamento `QueryStatus → status`. Tratamento de timeout. Testes 3, 4, 5, 8 verdes. | ✅ Concluído |
+| **D2** | Estados vazio e de erro renderizados. Testes 7, 8, 9 verdes. `data-testid` em tudo. | ✅ Concluído |
+| **D3** | `to_csv` e `to_json` implementados. Testes 1–4 verdes. | ✅ Concluído |
 
-**Marco Dia 3:** buscar username real (ex.: `torvalds`) e ver resultados reais. Sem export ainda.
+**Marco Dia 3:** ✅ Concluído.
 
 ### Dia 4 — Export e botões de download
 
-| Dupla | Entregas |
-|---|---|
-| **D1** | Buffer/folga: cobre casos de borda que aparecerem; ajuda D2/D3. |
-| **D2** | Botões "Exportar CSV/JSON" na página de resultados apontando pra `/export/?username=...&format=...`. |
-| **D3** | `export_view` completo: chama `SherlockService`, escolhe exporter, devolve resposta com `Content-Disposition`. Testes 5, 6, 7, 8 verdes. |
+| Dupla | Entregas | Status |
+|---|---|---|
+| **D1** | Buffer/folga: cobertura 91% em `core`. | ✅ Concluído |
+| **D2** | Botões "Exportar CSV/JSON" na página de resultados. | ✅ Concluído |
+| **D3** | `export_view` completo: chama `SherlockService`, escolhe exporter, devolve resposta com `Content-Disposition`. Testes 5–8 verdes. | ✅ Concluído |
 
-**Marco Dia 4:** fluxo ponta a ponta funcionando — busca real + export CSV/JSON baixando arquivo.
+**Marco Dia 4:** ✅ Concluído — fluxo ponta a ponta funcionando (busca + export CSV/JSON).
 
 ### Dia 5 — Polimento, cobertura e documentação
 
-| Dupla | Entregas |
-|---|---|
-| **D1** | Revisa cobertura do `core`, fecha gaps. |
-| **D2** | Polimento visual mínimo (CSS básico, mensagens de erro amigáveis). |
-| **D3** | CI com `--cov-fail-under=70` ativo. `README.md` atualizado. Apresentação do projeto preparada. |
+| Dupla | Entregas | Status |
+|---|---|---|
+| **D1** | Cobertura `core` = 91%. | ✅ |
+| **D2** | Templates com `data-testid` completos, CSS básico presente. | ✅ |
+| **D3** | CI com `--cov-fail-under=70` ativo. `README.md` criado. Cobertura total = **98%**. | ✅ |
 
-**Marco Dia 5:** cobertura ≥ 70%, CI verde em `master`, README com instruções, apresentação ensaiada.
+**Marco Dia 5:** ✅ Concluído — cobertura 98%, CI verde em `master`, README com instruções.
 
 ### Buffer e plano B
 - Se o Dia 3 atrasar (integração com `sherlock_project` complica), **mantém o mock** e entrega Dia 4 com mock — a banca enxerga o fluxo e os testes; integração real vira Pós-MVP.
@@ -340,8 +337,8 @@ Um item só está "pronto" quando:
 
 | Métrica | Meta | Onde se mede |
 |---|---|---|
-| Cobertura `web/` | ≥ 70% | `pytest --cov` no CI |
-| Cobertura `apps/core` | ≥ 80% | `pytest --cov=apps/core` |
+| Cobertura `web/` | ≥ 70% (atual: **98%**) | `pytest --cov` no CI |
+| Cobertura `apps/core` | ≥ 80% (atual: **91%**) | `pytest --cov=apps/core` |
 | Tempo da suíte | ≤ 15s local | `pytest --durations=10` |
 | PRs sem teste novo | **0** | Revisão manual + check de CI |
 
