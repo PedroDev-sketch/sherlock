@@ -1,7 +1,8 @@
 import csv
+import io
 import json
 from io import StringIO
-from typing import Iterable
+from typing import Iterable, List
 
 from apps.core.dtos import SiteResult
 
