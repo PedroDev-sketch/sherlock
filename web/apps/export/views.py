@@ -1,28 +1,34 @@
-from django.http import HttpResponse
-from django.views import View
+from django.http import HttpResponse, HttpResponseBadRequest
 
 from apps.core.dtos import SearchRequest
 from apps.core.services import SherlockService
+from apps.export.exporters import to_csv, to_json
 
-from .exporters import to_csv, to_json
-
-_VALID_FORMATS = {"csv", "json"}
+_ALLOWED_FORMATS = {"csv", "json"}
 
 
-class ExportView(View):
-    def get(self, request):
-        username = request.GET.get("username", "").strip()
-        fmt = request.GET.get("format", "").strip()
+def export_view(request):
+    username = request.GET.get("username", "").strip()
+    fmt = request.GET.get("format", "").strip().lower()
 
-        if not username:
-            return HttpResponse("username is required", status=400)
+    if not username:
+        return HttpResponseBadRequest("Parâmetro 'username' é obrigatório.")
 
-        if fmt not in _VALID_FORMATS:
-            return HttpResponse(f"format must be one of: {', '.join(_VALID_FORMATS)}", status=400)
+    if fmt not in _ALLOWED_FORMATS:
+        return HttpResponseBadRequest(
+            f"Formato '{fmt}' não suportado. Use csv ou json."
+        )
 
-        results = list(SherlockService().search(SearchRequest(username=username)))
+    service = SherlockService()
+    results = list(service.search(SearchRequest(username=username)))
 
-        if fmt == "csv":
-            return HttpResponse(to_csv(results), content_type="text/csv")
+    if fmt == "csv":
+        content = to_csv(results)
+        response = HttpResponse(content, content_type="text/csv; charset=utf-8")
+        response["Content-Disposition"] = f'attachment; filename="{username}.csv"'
+    else:
+        content = to_json(results, username=username)
+        response = HttpResponse(content, content_type="application/json")
+        response["Content-Disposition"] = f'attachment; filename="{username}.json"'
 
-        return HttpResponse(to_json(results, username), content_type="application/json")
+    return response

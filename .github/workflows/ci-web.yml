@@ -39,5 +39,4 @@ jobs:
         run: ruff check .
 
       - name: Test
-        run: pytest --cov=apps --cov-report=term-missing
-        # --cov-fail-under=70 será ativado no Dia 5 quando a suíte estiver verde
+        run: pytest --cov=apps --cov-report=term-missing --cov-fail-under=70

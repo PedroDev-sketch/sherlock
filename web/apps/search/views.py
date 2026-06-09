@@ -1,9 +1,12 @@
-from django.shortcuts import render
 from django.http import HttpResponseNotAllowed
-from .forms import SearchForm
-from apps.core.services import SherlockService
+from django.shortcuts import render
+
 from apps.core.dtos import SearchRequest
 from apps.core.exceptions import ServiceTimeoutError
+from apps.core.services import SherlockService
+
+from .forms import SearchForm
+
 
 def index_view(request):
     if request.method == 'GET':
@@ -14,7 +17,7 @@ def index_view(request):
 def results_view(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
-        
+
         if not form.is_valid():
             return render(request, 'search/index.html', {'form': form})
 
@@ -30,8 +33,10 @@ def results_view(request):
                 'is_empty': len(results) == 0
             }
             return render(request, 'search/results.html', context)
-            
+
         except ServiceTimeoutError:
-            return render(request, 'search/results.html', {'error': 'Timeout ao consultar o serviço upstream.'})
-            
+            return render(request, 'search/results.html', {
+                'error': 'Timeout ao consultar o serviço upstream.',
+            })
+
     return HttpResponseNotAllowed(['POST'])

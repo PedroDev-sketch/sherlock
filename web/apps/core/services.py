@@ -7,15 +7,17 @@ em SiteResult DTOs com mapeamento de status (Anexo A do PLANO_TDD.md).
 """
 
 import logging
+import re
 from typing import Iterator
 
-from sherlock_project.result import QueryStatus
+import requests
 from sherlock_project.notify import QueryNotify
-from sherlock_project.sites import SitesInformation
+from sherlock_project.result import QueryStatus
 from sherlock_project.sherlock import sherlock
+from sherlock_project.sites import SitesInformation
 
 from .dtos import SearchRequest, SiteResult
-from .exceptions import InvalidUsernameError
+from .exceptions import InvalidUsernameError, ServiceTimeoutError
 
 logger = logging.getLogger(__name__)
 
@@ -61,18 +63,29 @@ class SherlockService:
         # --- Validação de entrada ---
         if not req.username or not req.username.strip():
             raise InvalidUsernameError("Username não pode ser vazio.")
+        if not re.match(r'^[a-zA-Z0-9_.-]+$', req.username):
+            raise InvalidUsernameError(
+                f"Username contém caracteres inválidos: {req.username!r}"
+            )
 
         # --- Carrega dados de sites ---
         sites_info = SitesInformation(data_file_path=None)
         site_data = {site.name: site.information for site in sites_info}
+        if req.sites:
+            site_data = {
+                name: info for name, info in site_data.items() if name in req.sites
+            }
 
         # --- Dispara a busca via sherlock() ---
-        results = sherlock(
-            username=req.username,
-            site_data=site_data,
-            query_notify=_SilentNotify(),
-            timeout=int(req.timeout),
-        )
+        try:
+            results = sherlock(
+                username=req.username,
+                site_data=site_data,
+                query_notify=_SilentNotify(),
+                timeout=int(req.timeout),
+            )
+        except requests.exceptions.Timeout as exc:
+            raise ServiceTimeoutError("Busca expirou.") from exc
 
         # --- Converte resultados para DTOs ---
         for site_name, site_info in results.items():
