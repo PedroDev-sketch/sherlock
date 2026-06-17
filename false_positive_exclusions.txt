@@ -10,10 +10,11 @@ Discord.bio
 Envato Forum
 GeeksforGeeks
 Giphy
-HackenProof (Hackers)
 Hashnode
 Hubski
 LessWrong
+Minecraft
+Odysee
 Patched
 Rarible
 Realmeye
