@@ -10,10 +10,10 @@ Discord.bio
 Envato Forum
 GeeksforGeeks
 Giphy
-Gravatar
 Hashnode
 Hubski
 LessWrong
+Minecraft
 Odysee
 Patched
 Rarible
@@ -23,9 +23,11 @@ Replit.com
 RocketTube
 Scribd
 Shelf
+Slack
 SlideShare
 Splice
 Spotify
+Strava
 Trovo
 TryHackMe
 Velomania
