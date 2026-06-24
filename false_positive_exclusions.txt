@@ -1,11 +1,9 @@
 7Cups
-APClips
 Airliners
 Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-BoardGameGeek
 Codolio
 DeviantArt
 Discord.bio
@@ -15,7 +13,6 @@ Giphy
 Hashnode
 Hubski
 LessWrong
-Minecraft
 Odysee
 Patched
 Pornhub
@@ -36,10 +33,10 @@ Weblate
 YandexMusic
 authorSTREAM
 dailykos
-hunting
 igromania
 interpals
 mercadolivre
 opennet
 phpRU
 svidbook
+xHamster
