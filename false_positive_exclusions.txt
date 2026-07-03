@@ -5,10 +5,10 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-BoardGameGeek
 BreachSta.rs Forum
 Codolio
 Cults3D
+DeviantArt
 Discord.bio
 Envato Forum
 GeeksforGeeks
@@ -17,7 +17,7 @@ Hashnode
 Houzz
 Hubski
 LessWrong
-Odysee
+OurDJTalk
 PCGamer
 Patched
 Pornhub
@@ -31,6 +31,8 @@ Shelf
 SlideShare
 Splice
 Spotify
+Strava
+Trovo
 TryHackMe
 Velomania
 Weblate
@@ -41,6 +43,8 @@ fixya
 igromania
 interpals
 mercadolivre
+minds
+nnRU
 opennet
 phpRU
 svidbook
