@@ -5,6 +5,7 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
+Blogger
 BreachSta.rs Forum
 Codolio
 DeviantArt
@@ -16,9 +17,9 @@ Hashnode
 Houzz
 Hubski
 LessWrong
+LiveJournal
 Odysee
 PCGamer
-Patched
 Pornhub
 Rarible
 Realmeye
@@ -30,6 +31,7 @@ Shelf
 SlideShare
 Splice
 Spotify
+Star Citizen
 Trovo
 TryHackMe
 Velomania
