@@ -5,17 +5,14 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-Blogger
 BreachSta.rs Forum
 Codolio
 DeviantArt
 Discord.bio
-Eintracht Frankfurt Forum
 Envato Forum
 GeeksforGeeks
 Giphy
 Hashnode
-Houzz
 Hubski
 LessWrong
 Odysee
@@ -45,3 +42,4 @@ mercadolivre
 opennet
 phpRU
 svidbook
+xHamster
