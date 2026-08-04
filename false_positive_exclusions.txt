@@ -8,9 +8,9 @@ Bandcamp
 Blogger
 Chatujme.cz
 Codolio
-Cults3D
 DeviantArt
 Discord.bio
+Eintracht Frankfurt Forum
 Envato Forum
 F3.cool
 GeeksforGeeks
@@ -22,7 +22,6 @@ Instapaper
 LessWrong
 Odysee
 PCGamer
-Patched
 Pornhub
 Rarible
 Realmeye
@@ -35,8 +34,10 @@ Shelf
 SlideShare
 Splice
 Spotify
+Trakt
 Trovo
 TryHackMe
+Velomania
 Weblate
 YandexMusic
 authorSTREAM
@@ -47,4 +48,3 @@ mercadolivre
 opennet
 phpRU
 svidbook
-xHamster
