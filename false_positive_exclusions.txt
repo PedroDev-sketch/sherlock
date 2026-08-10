@@ -6,12 +6,10 @@ Apple Discussions
 Archive.org
 Bandcamp
 Chatujme.cz
-Chess
 Codolio
 DeviantArt
 Discord.bio
 Envato Forum
-F3.cool
 GeeksforGeeks
 Giphy
 Hashnode
@@ -19,7 +17,6 @@ Houzz
 Hubski
 Instapaper
 Odysee
-OurDJTalk
 PCGamer
 Patched
 Pornhub
@@ -32,16 +29,14 @@ RocketTube
 Scribd
 Shelf
 SlideShare
-Snapchat
 Splice
 Spotify
 Trovo
 TryHackMe
+Velomania
 Weblate
 YandexMusic
-authorSTREAM
 dailykos
-dcinside
 igromania
 interpals
 mercadolivre
