@@ -11,12 +11,14 @@ Codolio
 DeviantArt
 Discord.bio
 Envato Forum
+F3.cool
 GeeksforGeeks
 Giphy
 Hashnode
 Houzz
 Hubski
 Instapaper
+Minecraft
 Odysee
 PCGamer
 Patched
@@ -37,6 +39,7 @@ TryHackMe
 Velomania
 Weblate
 YandexMusic
+authorSTREAM
 dailykos
 hunting
 igromania
@@ -45,3 +48,4 @@ mercadolivre
 opennet
 phpRU
 svidbook
+xHamster
