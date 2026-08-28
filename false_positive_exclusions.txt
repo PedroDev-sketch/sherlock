@@ -5,7 +5,6 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-Blogger
 Championat
 Chatujme.cz
 Codolio
@@ -19,7 +18,10 @@ Hashnode
 Houzz
 Hubski
 Instapaper
+Itch.io
+Minecraft
 Odysee
+OurDJTalk
 PCGamer
 Pornhub
 Rarible
@@ -33,6 +35,7 @@ Shelf
 SlideShare
 Splice
 Spotify
+Trakt
 Trovo
 TryHackMe
 Velomania
