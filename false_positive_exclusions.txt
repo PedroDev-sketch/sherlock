@@ -1,9 +1,11 @@
 7Cups
+APClips
 Airliners
 Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
+Carbonmade
 Championat
 Chatujme.cz
 ChaturBate
@@ -21,6 +23,7 @@ ObservableHQ
 Odysee
 PCGamer
 Pornhub
+Rarible
 Realmeye
 Reddit
 ReverbNation
@@ -30,6 +33,7 @@ Shelf
 SlideShare
 Splice
 Spotify
+Trakt
 Trovo
 TryHackMe
 Velomania
