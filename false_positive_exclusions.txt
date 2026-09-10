@@ -18,11 +18,12 @@ Hashnode
 Houzz
 Hubski
 Instapaper
+Itch.io
 ObservableHQ
 Odysee
-OurDJTalk
 PCGamer
 Pornhub
+Rajce.net
 Rarible
 Realmeye
 Reddit
@@ -32,7 +33,6 @@ Shelf
 SlideShare
 Splice
 Spotify
-Star Citizen
 Trakt
 Trovo
 TryHackMe
@@ -50,4 +50,3 @@ opennet
 phpRU
 social.tchncs.de
 svidbook
-xHamster
