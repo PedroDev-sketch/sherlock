@@ -5,17 +5,16 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-Carbonmade
 Championat
 Chatujme.cz
 ChaturBate
 Codolio
-ColourLovers
 DeviantArt
 Discord.bio
 Envato Forum
 GeeksforGeeks
 Giphy
+Gravatar
 Hashnode
 Houzz
 Hubski
@@ -34,6 +33,7 @@ Shelf
 SlideShare
 Splice
 Spotify
+Trakt
 Trovo
 TryHackMe
 Velomania
@@ -41,6 +41,7 @@ Weblate
 YandexMusic
 authorSTREAM
 dailykos
+eintracht
 fixya
 hunting
 igromania
