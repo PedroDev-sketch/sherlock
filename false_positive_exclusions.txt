@@ -13,7 +13,6 @@ Codolio
 DeviantArt
 Discord.bio
 Envato Forum
-Forum Ophilia
 GeeksforGeeks
 Giphy
 Hashnode
@@ -52,3 +51,4 @@ opennet
 phpRU
 social.tchncs.de
 svidbook
+xHamster
