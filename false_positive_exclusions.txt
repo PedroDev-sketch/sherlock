@@ -4,16 +4,15 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-Blogger
-BoardGameGeek
 CGTrader
 Championat
 Chatujme.cz
-ChaturBate
 Codolio
+DEV Community
 DeviantArt
 Discord.bio
 Envato Forum
+GaiaOnline
 GeeksforGeeks
 Giphy
 HackerNews
@@ -25,19 +24,16 @@ Linktree
 ObservableHQ
 Odysee
 PCGamer
-Pornhub
 Rarible
 Realmeye
 Reddit
 ReverbNation
 RocketTube
-RuneScape
 Scribd
 Shelf
 SlideShare
 Splice
 Spotify
-Trakt
 Trovo
 TryHackMe
 Velomania
