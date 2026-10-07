@@ -6,12 +6,14 @@ Apple Discussions
 Archive.org
 Bandcamp
 Blogger
+CGTrader
 Championat
 Chatujme.cz
 ChaturBate
 Codolio
 DeviantArt
 Discord.bio
+Eintracht Frankfurt Forum
 Envato Forum
 GaiaOnline
 GeeksforGeeks
@@ -22,8 +24,10 @@ Houzz
 Hubski
 Instapaper
 Linktree
+Minecraft
 ObservableHQ
 Odysee
+OurDJTalk
 PCGamer
 Pornhub
 Rarible
@@ -52,4 +56,3 @@ opennet
 phpRU
 social.tchncs.de
 svidbook
-xHamster
