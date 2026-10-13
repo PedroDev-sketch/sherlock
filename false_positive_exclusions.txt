@@ -4,8 +4,6 @@ Apple Developer
 Apple Discussions
 Archive.org
 Bandcamp
-Blogger
-BoardGameGeek
 CGTrader
 Championat
 Chatujme.cz
@@ -17,12 +15,12 @@ GaiaOnline
 GeeksforGeeks
 Giphy
 HackerNews
-HackerRank
 Hashnode
 Houzz
 Hubski
 Instapaper
 Linktree
+LiveJournal
 Minecraft
 ObservableHQ
 Odysee
@@ -46,7 +44,6 @@ YandexMusic
 authorSTREAM
 dailykos
 fixya
-fl
 hunting
 interpals
 mercadolivre
