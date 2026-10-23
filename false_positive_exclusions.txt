@@ -23,8 +23,6 @@ Hubski
 Instapaper
 Linktree
 Minecraft
-NationStates Nation
-NationStates Region
 ObservableHQ
 Odysee
 PCGamer
@@ -38,6 +36,7 @@ Shelf
 SlideShare
 Splice
 Spotify
+Trakt
 TryHackMe
 Velomania
 Weblate
