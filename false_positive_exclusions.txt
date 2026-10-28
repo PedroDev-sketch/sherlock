@@ -1,10 +1,10 @@
+APClips
 Airliners
 Apple Developer
 Apple Discussions
 Archive.org
-BabyRu
-Blogger
 Championat
+Chatujme.cz
 Codolio
 DeviantArt
 Discord.bio
@@ -28,10 +28,9 @@ Shelf
 SlideShare
 Splice
 Spotify
-TikTok
-Trakt
 TryHackMe
 Velomania
+Vero
 Weblate
 YandexMusic
 authorSTREAM
@@ -44,3 +43,4 @@ opennet
 phpRU
 social.tchncs.de
 svidbook
+xHamster
