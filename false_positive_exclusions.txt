@@ -14,10 +14,12 @@ HackerNews
 Hashnode
 Hubski
 Instapaper
-Minecraft
+Itch.io
 ObservableHQ
 Odysee
 PCGamer
+Patched
+Pychess
 Rarible
 Realmeye
 Reddit
@@ -43,4 +45,3 @@ mercadolivre
 opennet
 phpRU
 social.tchncs.de
-svidbook
