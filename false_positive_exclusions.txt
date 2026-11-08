@@ -13,7 +13,6 @@ HackerNews
 Hashnode
 Hubski
 Instapaper
-Itch.io
 ObservableHQ
 Odysee
 PCGamer
