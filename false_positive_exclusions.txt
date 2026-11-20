@@ -13,10 +13,7 @@ HackerNews
 Hashnode
 Hubski
 Instapaper
-Itch.io
-LibraryThing
 Linktree
-Minecraft
 ObservableHQ
 Odysee
 PCGamer
@@ -45,3 +42,4 @@ mercadolivre
 opennet
 phpRU
 social.tchncs.de
+xHamster
